@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.set_page_config(page_title="3D Printing Profit Calculator", layout="wide")
+st.set_page_config(page_title="IterationOne Pricing Calculator", layout="wide")
 
 st.title("3D Printing Business Pricing & Profit Calculator")
 st.markdown("Calculate costs and profit splits for a bootstrapped, two-person 3D printing business.")
@@ -15,7 +15,7 @@ with col2:
 with col3:
     printer_energy_kwh = st.number_input("Printer Energy Usage (kW/h)", min_value=0.0, value=0.1, step=0.05)
 with col4:
-    maintenance_cost_per_hour = st.number_input("Maintenance / Print Hour (₹)", min_value=0.0, value=5, step=0.10)
+    maintenance_cost_per_hour = st.number_input("Maintenance / Print Hour (₹)", min_value=0.0, value=5.0, step=0.10)
 
 st.header("2. Product Specifics")
 col_p1, col_p2 = st.columns(2)
