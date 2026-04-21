@@ -9,13 +9,13 @@ st.header("1. Global Variables")
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    filament_price = st.number_input("Filament Price per kg ($)", min_value=0.0, value=20.0, step=1.0)
+    filament_price = st.number_input("Filament Price per kg (₹)", min_value=0.0, value=20.0, step=1.0)
 with col2:
-    electricity_cost = st.number_input("Electricity Cost / kWh ($)", min_value=0.0, value=0.15, step=0.01)
+    electricity_cost = st.number_input("Electricity Cost / kWh (₹)", min_value=0.0, value=0.15, step=0.01)
 with col3:
     printer_power = st.number_input("Printer Power (W)", min_value=0.0, value=300.0, step=10.0)
 with col4:
-    maintenance_cost_per_hour = st.number_input("Maintenance / Print Hour ($)", min_value=0.0, value=0.50, step=0.10)
+    maintenance_cost_per_hour = st.number_input("Maintenance / Print Hour (₹)", min_value=0.0, value=0.50, step=0.10)
 
 st.header("2. Product Specifics")
 col_p1, col_p2 = st.columns(2)
@@ -48,7 +48,7 @@ with col_e2:
 st.header("4. Pricing Strategy")
 col_s1, col_s2 = st.columns(2)
 with col_s1:
-    hourly_rate = st.number_input("Target Hourly Rate for Labor ($)", min_value=0.0, value=25.0, step=1.0)
+    hourly_rate = st.number_input("Target Hourly Rate for Labor (₹)", min_value=0.0, value=25.0, step=1.0)
 with col_s2:
     profit_margin = st.number_input("Desired Profit Margin (%)", min_value=0.0, value=30.0, step=1.0) / 100.0
 
@@ -101,21 +101,21 @@ col_r1, col_r2, col_r3 = st.columns(3)
 
 with col_r1:
     st.subheader("Cost Breakdown")
-    st.write(f"**Material Cost:** ${material_cost:.2f}")
-    st.write(f"**Electricity Cost:** ${energy_cost:.2f}")
-    st.write(f"**Maintenance Cost:** ${maintenance_cost:.2f}")
-    st.markdown(f"**Total COGS:** **${total_cogs:.2f}**")
+    st.write(f"**Material Cost:** ₹{material_cost:.2f}")
+    st.write(f"**Electricity Cost:** ₹{energy_cost:.2f}")
+    st.write(f"**Maintenance Cost:** ₹{maintenance_cost:.2f}")
+    st.markdown(f"**Total COGS:** **₹{total_cogs:.2f}**")
 
 with col_r2:
     st.subheader("Pricing Summary")
-    st.write(f"**Base Price (COGS + Labor):** ${base_price:.2f}")
-    st.write(f"**Total Profit (Labor + Margin):** ${total_profit:.2f}")
-    st.markdown(f"### **Final Suggested Price: ${final_price:.2f}**")
+    st.write(f"**Base Price (COGS + Labor):** ₹{base_price:.2f}")
+    st.write(f"**Total Profit (Labor + Margin):** ₹{total_profit:.2f}")
+    st.markdown(f"### **Final Suggested Price: ₹{final_price:.2f}**")
 
 with col_r3:
     st.subheader("Payout Distribution")
-    st.success(f"**Person A Payout:** ${person_a_payout:.2f}")
-    st.info(f"**Person B Payout:** ${person_b_payout:.2f}")
+    st.success(f"**Person A Payout:** ₹{person_a_payout:.2f}")
+    st.info(f"**Person B Payout:** ₹{person_b_payout:.2f}")
 
     # Sanity check display
     if round(person_a_payout + person_b_payout, 2) == round(total_profit, 2):
