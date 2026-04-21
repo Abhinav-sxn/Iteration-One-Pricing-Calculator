@@ -25,7 +25,14 @@ with col_p1:
 with col_p2:
     print_time = st.number_input("Print Time (hours)", min_value=0.0, value=8.0, step=0.5)
 
-st.header("3. Dynamic Team Effort & Ratios")
+st.header("3. Printer & Material Expenses (COGS)")
+st.markdown("Determine who covers the upfront costs for materials, electricity, and printer maintenance.")
+
+cogs_person_b_share = st.slider("Person B COGS Coverage (%)", min_value=0, max_value=100, value=100, key="cogs_share")
+cogs_person_a_share = 100 - cogs_person_b_share
+st.write(f"Person A COGS Coverage: **{cogs_person_a_share}%**")
+
+st.header("4. Dynamic Team Effort & Ratios")
 st.markdown("Determine the total time spent and how the effort is distributed between Person A and Person B.")
 
 col_e1, col_e2 = st.columns(2)
@@ -44,7 +51,7 @@ with col_e2:
     person_b_labor_share = 100 - person_a_labor_share
     st.write(f"Person B Labor Contribution: **{person_b_labor_share}%**")
 
-st.header("4. Pricing Strategy")
+st.header("5. Pricing Strategy")
 col_s1, col_s2 = st.columns(2)
 with col_s1:
     hourly_rate = st.number_input("Target Hourly Rate for Labor (₹)", min_value=0.0, value=25.0, step=1.0)
@@ -73,7 +80,7 @@ final_price = base_price * (1 + profit_margin)
 total_profit = final_price - total_cogs # The amount available to pay for time + margin
 
 # 4. Payout Distribution
-# Calculate the monetary value contributed by each person
+# Calculate the monetary value contributed by each person (for time/effort)
 person_a_contribution_value = (total_design_value * (person_a_design_share / 100.0)) + \
                               (total_labor_value * (person_a_labor_share / 100.0))
 
@@ -89,12 +96,21 @@ else:
     person_a_ratio = 0.5
     person_b_ratio = 0.5
 
-person_a_payout = total_profit * person_a_ratio
-person_b_payout = total_profit * person_b_ratio
+# Profit split (this is just the markup and labor value)
+person_a_profit_share = total_profit * person_a_ratio
+person_b_profit_share = total_profit * person_b_ratio
+
+# COGS reimbursement (whoever paid for materials/printer gets this back)
+person_a_cogs_reimbursement = total_cogs * (cogs_person_a_share / 100.0)
+person_b_cogs_reimbursement = total_cogs * (cogs_person_b_share / 100.0)
+
+# Total payouts
+person_a_payout = person_a_profit_share + person_a_cogs_reimbursement
+person_b_payout = person_b_profit_share + person_b_cogs_reimbursement
 
 # --- Results ---
 
-st.header("5. Results & Exact Payout Distribution")
+st.header("6. Results & Exact Payout Distribution")
 
 col_r1, col_r2, col_r3 = st.columns(3)
 
@@ -112,12 +128,15 @@ with col_r2:
     st.markdown(f"### **Final Suggested Price: ₹{final_price:.2f}**")
 
 with col_r3:
-    st.subheader("Payout Distribution")
+    st.subheader("Total Revenue Distribution")
     st.success(f"**Person A Payout:** ₹{person_a_payout:.2f}")
+    st.caption(f"(Profit: ₹{person_a_profit_share:.2f} + COGS Reimbursement: ₹{person_a_cogs_reimbursement:.2f})")
+    
     st.info(f"**Person B Payout:** ₹{person_b_payout:.2f}")
+    st.caption(f"(Profit: ₹{person_b_profit_share:.2f} + COGS Reimbursement: ₹{person_b_cogs_reimbursement:.2f})")
 
     # Sanity check display
-    if round(person_a_payout + person_b_payout, 2) == round(total_profit, 2):
-        st.caption("✅ Payouts match total profit exactly.")
+    if round(person_a_payout + person_b_payout, 2) == round(final_price, 2):
+        st.caption("✅ Total payouts match the Final Suggested Price exactly.")
     else:
         st.caption("⚠️ Payout mismatch (rounding error).")
