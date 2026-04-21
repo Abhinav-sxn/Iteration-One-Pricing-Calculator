@@ -39,7 +39,6 @@ with col_e1:
 
 with col_e2:
     st.subheader("Physical Labor Time")
-    st.markdown("*(e.g., slicing, starting prints, post-processing)*")
     labor_time = st.number_input("Total Physical Labor Time (hours)", min_value=0.0, value=1.5, step=0.5)
     person_a_labor_share = st.slider("Person A Labor Contribution (%)", min_value=0, max_value=100, value=50, key="labor_share")
     person_b_labor_share = 100 - person_a_labor_share
