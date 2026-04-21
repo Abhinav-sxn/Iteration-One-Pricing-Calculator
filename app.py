@@ -13,7 +13,7 @@ with col1:
 with col2:
     electricity_cost = st.number_input("Electricity Cost / kWh (₹)", min_value=0.0, value=0.15, step=0.01)
 with col3:
-    printer_power = st.number_input("Printer Power (W)", min_value=0.0, value=300.0, step=10.0)
+    printer_energy_kwh = st.number_input("Printer Energy Usage (kW/h)", min_value=0.0, value=0.3, step=0.05)
 with col4:
     maintenance_cost_per_hour = st.number_input("Maintenance / Print Hour (₹)", min_value=0.0, value=0.50, step=0.10)
 
@@ -58,7 +58,7 @@ st.divider()
 
 # 1. Cost of Goods Sold (COGS)
 material_cost = (filament_price / 1000.0) * filament_weight
-energy_kwh = (printer_power / 1000.0) * print_time
+energy_kwh = printer_energy_kwh * print_time
 energy_cost = energy_kwh * electricity_cost
 maintenance_cost = maintenance_cost_per_hour * print_time
 total_cogs = material_cost + energy_cost + maintenance_cost
