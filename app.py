@@ -9,13 +9,13 @@ st.header("1. Global Variables")
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    filament_price = st.number_input("Filament Price per kg (₹)", min_value=0.0, value=20.0, step=1.0)
+    filament_price = st.number_input("Filament Price per kg (₹)", min_value=0.0, value=1200.0, step=1.0)
 with col2:
-    electricity_cost = st.number_input("Electricity Cost / kWh (₹)", min_value=0.0, value=0.15, step=0.01)
+    electricity_cost = st.number_input("Electricity Cost / kWh (₹)", min_value=0.0, value=8.5, step=0.01)
 with col3:
-    printer_energy_kwh = st.number_input("Printer Energy Usage (kW/h)", min_value=0.0, value=0.3, step=0.05)
+    printer_energy_kwh = st.number_input("Printer Energy Usage (kW/h)", min_value=0.0, value=0.1, step=0.05)
 with col4:
-    maintenance_cost_per_hour = st.number_input("Maintenance / Print Hour (₹)", min_value=0.0, value=0.50, step=0.10)
+    maintenance_cost_per_hour = st.number_input("Maintenance / Print Hour (₹)", min_value=0.0, value=5, step=0.10)
 
 st.header("2. Product Specifics")
 col_p1, col_p2 = st.columns(2)
